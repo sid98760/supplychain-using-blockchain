@@ -45,7 +45,7 @@ const ComponentB = () => {
                     <p>No contacts found.</p>
                 )
             ) : (
-                <p className="text-2xl text-center p-5">Loading...</p>
+                <p className="text-2xl text-center p-5">Loading..</p>
             )}
             </ScrollArea>
             </div>
