@@ -45,7 +45,14 @@ const ComponentB = () => {
                     <p>No contacts found.</p>
                 )
             ) : (
-                <p className="text-2xl text-center p-5">Loading..</p>
+                <div className="flex items-center space-x-4 ml-16 mt-10">
+                    <Skeleton className="h-24 w-24 rounded-full" />
+                        <div className="space-y-2">
+                            <Skeleton className="h-6 w-[300px]" />
+                            <Skeleton className="h-6 w-[250px]" />
+                        </div>
+                </div>
+                
             )}
             </ScrollArea>
             </div>
