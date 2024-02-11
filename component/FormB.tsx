@@ -1,17 +1,18 @@
 import React from 'react'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import { Web3Button } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../const/addresses";
 import { ScrollArea } from '../@/components/ui/scroll-area';
-
 import { cn } from '../@/lib/utils';
-import { ToastAction } from '../@/components/ui/toast';
-import { useToast } from '../@/components/ui/use-toast';
+import { useAddress } from '@thirdweb-dev/react';
+
+
 
 
 const FormB = () => {
 
+    const addr = useAddress();
     const [addContact, setAddContact] = useState(false);
     const [sendername, setName1] = useState("");
     const [receivername, setName2] = useState("");
@@ -19,7 +20,9 @@ const FormB = () => {
     const [addressreceiver, setAddress2] = useState("");
     const [index,setindex] = useState("");
     const [value1, setValue] = useState("");
+
     const [pay,setpay] = useState("");
+    const[disable,setable]=useState(false);
 
     function resetForm() {
         setName1("");
@@ -33,7 +36,140 @@ const FormB = () => {
         console.log(pay);
     }
 
-    const {toast} = useToast()
+    const [err1,seterr1]=useState("");
+
+    if(sendername!=""){
+        if(document.getElementById("SENDER")){
+            document.getElementById("SENDER")!.style.borderColor = "white";
+            document.getElementById("SENDER")!.style.borderWidth = "2px"  ;
+            document.getElementById("sendererror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }    
+    }
+    if(receivername!=""){
+        if(document.getElementById("RECEIVER")){
+            document.getElementById("RECEIVER")!.style.borderColor = "white";
+            document.getElementById("RECEIVER")!.style.borderWidth = "2px";
+            document.getElementById("receivererror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }
+        
+    }
+    if(addressreceiver!=""){
+        if(document.getElementById("RECEIVERADDRESS")){
+            document.getElementById("RECEIVERADDRESS")!.style.borderColor = "white";
+            document.getElementById("RECEIVERADDRESS")!.style.borderWidth = "2px";
+            document.getElementById("receiveraddresserror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }
+    }
+    if(index!=""){
+        if(document.getElementById("INDEX")){
+            document.getElementById("INDEX")!.style.borderColor = "white";
+            document.getElementById("INDEX")!.style.borderWidth = "2px";
+            document.getElementById("indexerror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }
+        
+    }
+    if(value1=="-1"){
+        if(document.getElementById("ROLE"))
+        {
+            document.getElementById("ROLE")!.style.borderColor = "red";
+            document.getElementById("ROLE")!.style.borderWidth = "4px";
+            document.getElementById("roleerror")!.innerHTML = "Please choose your role!";
+        }
+    }
+    else if(value1!=""){
+        if(document.getElementById("ROLE"))
+        {
+            document.getElementById("ROLE")!.style.borderColor = "white";
+            document.getElementById("ROLE")!.style.borderWidth = "2px";
+            document.getElementById("roleerror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }
+        
+  
+    }
+    if(pay=="-1"){
+        if(document.getElementById("PAY")){
+            document.getElementById("PAY")!.style.borderColor = "red";
+            document.getElementById("PAY")!.style.borderWidth = "4px";
+            document.getElementById("payerror")!.innerHTML = "Please choose your payment status!";
+        }
+    }
+    else if(pay!=""){
+        if(document.getElementById("PAY")){
+            document.getElementById("PAY")!.style.borderColor = "white";
+            document.getElementById("PAY")!.style.borderWidth = "2px";
+            document.getElementById("payerror")!.innerHTML = "";     
+            if(disable!=false){
+                setable(false);
+            }
+        }
+        
+    }
+
+    
+
+
+    function handlevalidation(){
+        if(sendername==""){
+            document.getElementById("SENDER")!.style.borderColor = "red";
+            document.getElementById("SENDER")!.style.borderWidth = "2px";
+            document.getElementById("sendererror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(receivername==""){
+            document.getElementById("RECEIVER")!.style.borderColor = "red";
+            document.getElementById("RECEIVER")!.style.borderWidth = "2px";
+            document.getElementById("receivererror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(addressreceiver==""){
+            document.getElementById("RECEIVERADDRESS")!.style.borderColor = "red";
+            document.getElementById("RECEIVERADDRESS")!.style.borderWidth = "2px";
+            document.getElementById("receiveraddresserror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(index==""){
+            document.getElementById("INDEX")!.style.borderColor = "red";
+            document.getElementById("INDEX")!.style.borderWidth = "2px";
+            document.getElementById("indexerror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(value1==""){
+            document.getElementById("ROLE")!.style.borderColor = "red";
+            document.getElementById("ROLE")!.style.borderWidth = "2px";
+            document.getElementById("roleerror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(pay==""){
+            document.getElementById("PAY")!.style.borderColor = "red";
+            document.getElementById("PAY")!.style.borderWidth = "2px";
+            document.getElementById("payerror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        
+        
+        
+    }
 
   return (
     <>
@@ -53,58 +189,75 @@ const FormB = () => {
                     >Close</button>
                     <h1>Add Shipment Details</h1>
                         <ScrollArea className={styles.addContactForm}>
+                            <p id="sendererror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="text"
                                 placeholder="Sender Name"
                                 value={sendername}
                                 onChange={(e) => setName1(e.target.value)}
+                                id='SENDER'
                             />
+
+                            <p id="receivererror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="text"
                                 placeholder="Receiver Name"
                                 value={receivername}
                                 onChange={(e) => setName2(e.target.value)}
+                                id='RECEIVER'
                             />
-                            <input 
-                                type="text" 
-                                placeholder="Sender Address"
-                                value={addresssender}
-                                onChange={(e) => setAddress1(e.target.value)}
-                            />
+                            
+                            
+                            <p id="receiveraddresserror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="text" 
                                 placeholder="Receiver Address"
                                 value={addressreceiver}
                                 onChange={(e) => setAddress2(e.target.value)}
+                                id='RECEIVERADDRESS'
                             />
+                            
+                            <p id="indexerror" className='text-sm/[6px] mb-3 text-red-700 font-bold'></p>
                             <input 
                                 type="number"
                                 placeholder="Index"
                                 min="0"
                                 value={index}
                                 onChange={(e) => setindex(e.target.value)}
+                                id='INDEX'
                             />
-                        
+                            
+                            <p id="roleerror" className='text-sm/[6px] mb-3 text-red-700 font-bold'>{err1}</p>
                             <select
                                 value={value1}
                                 onChange={(e) => {
-                                    setValue(e.target.value);
+                                    setValue(e.target.value);        
                                 }}
+                                id='ROLE'
                             >
+                            
+                                <option value="-1">Select your Role</option>
                                 <option value="0">Manufacturer</option>
                                 <option value="1">WholeSaler</option>
                                 <option value="2">Retailer</option>
                             </select>
+                            
+                            
+                            <p id="payerror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <select
                                 value={pay}
                                 onChange={(e) => {
                                     setpay(e.target.value);
                                 }}
+                                id='PAY'
                             >
+                            
+                                <option value="-1">Select your Payment Status</option>
                                 <option value="0">Paid</option>
                                 <option value="1">Unpaid</option>
                                 <option value="2">Token Received</option>
                             </select>
+                            
                         </ScrollArea>
 
                     <Web3Button
@@ -114,7 +267,7 @@ const FormB = () => {
                             [
                                 sendername,
                                 receivername,
-                                addresssender,
+                                addr,
                                 addressreceiver,
                                 index,
                                 value1,
@@ -125,7 +278,11 @@ const FormB = () => {
                             resetForm();
                             setAddContact(false);
                         }}
-                        onError={(Error)=> alert(Error)}
+                        onSubmit={()=>{
+                            handlevalidation()
+                        }}
+                        onError={()=>{}}
+                        isDisabled={disable}
                     >Start Shipment</Web3Button>
                 </div>
             </div>
