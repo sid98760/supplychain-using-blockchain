@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 import { Web3Button } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../const/addresses";
-import { ScrollArea } from '../@/components/ui/scroll-area';
+import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import { useAddress } from '@thirdweb-dev/react';
 
 import { ToastAction } from "../@/components/ui/toast"
@@ -25,7 +25,62 @@ const FormA = () => {
     }
 
     const add = useAddress();
-    const { toast } = useToast()
+    const[disable,setable]=useState(false);
+
+    if(index!=""){
+        if(document.getElementById("ind")){
+            document.getElementById("ind")!.style.borderColor = "white";
+            document.getElementById("ind")!.style.borderWidth = "2px"  ;
+            document.getElementById("numbererror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }    
+    }
+    if(product!=""){
+        if(document.getElementById("prod")){
+            document.getElementById("prod")!.style.borderColor = "white";
+            document.getElementById("prod")!.style.borderWidth = "2px";
+            document.getElementById("producterror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }
+        
+    }
+    if(quantity!=""){
+        if(document.getElementById("quan")){
+            document.getElementById("quan")!.style.borderColor = "white";
+            document.getElementById("quan")!.style.borderWidth = "2px";
+            document.getElementById("quanerror")!.innerHTML = "";
+            if(disable!=false){
+                setable(false);
+            }
+        }
+    }
+
+    function handlevalidation(){
+        if(index==""){
+            document.getElementById("ind")!.style.borderColor = "red";
+            document.getElementById("ind")!.style.borderWidth = "2px";
+            document.getElementById("numbererror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(product==""){
+            document.getElementById("prod")!.style.borderColor = "red";
+            document.getElementById("prod")!.style.borderWidth = "2px";
+            document.getElementById("producterror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+        
+        if(quantity==""){
+            document.getElementById("quan")!.style.borderColor = "red";
+            document.getElementById("quan")!.style.borderWidth = "2px";
+            document.getElementById("quanerror")!.innerHTML = "This Field cannot be empty!";
+            setable(true)
+        }
+    }
 
   return (
     <>
@@ -45,26 +100,34 @@ const FormA = () => {
                     >Close</button>
                     <h1>Add Shipment Details</h1>
                     <ScrollArea className={styles.addContactForm}>
+                            <p id="numbererror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="number"
                                 min="0"
                                 placeholder="Index"
                                 value={index}
+                                id='ind'
                                 onChange={(e) => setIndex(e.target.value)}
                             />
+                            <p id="producterror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="text" 
                                 placeholder="Name of Product"
                                 value={product}
+                                id='prod'
                                 onChange={(e) => setProduct(e.target.value)}
                             />
+                            <p id="quanerror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="number"
                                 min="0"
                                 placeholder="Qauntity"
                                 value={quantity}
+                                id='quan'
                                 onChange={(e) => setQuantity(e.target.value)}
                             />
+                        
+                        <ScrollBar orientation="horizontal" />
                         </ScrollArea>
 
                         <Web3Button
@@ -83,15 +146,11 @@ const FormA = () => {
                             resetForm();
                             setAddContact(false);
                         }}
-                        onError={() => {
-                            toast({
-                              title: "Something went Wrong",
-                              description: "Something went wrong, please fill form correctly",
-                              action: (
-                                <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-                              ),
-                            })
-                          }}
+                        onError={() => {}}
+                        onSubmit={()=>{
+                            handlevalidation()
+                        }}
+                        isDisabled={disable}
                     >Create Shipment</Web3Button>
                 </div>
             </div>

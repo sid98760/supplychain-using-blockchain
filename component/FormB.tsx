@@ -1,13 +1,13 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import { useState,useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import { Web3Button } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../const/addresses";
-import { ScrollArea } from '../@/components/ui/scroll-area';
+import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import { cn } from '../@/lib/utils';
 import { useAddress } from '@thirdweb-dev/react';
-
-
+import flatpickr from "flatpickr";
+import moment from 'moment';
 
 
 const FormB = () => {
@@ -20,9 +20,9 @@ const FormB = () => {
     const [addressreceiver, setAddress2] = useState("");
     const [index,setindex] = useState("");
     const [value1, setValue] = useState("");
-
     const [pay,setpay] = useState("");
     const[disable,setable]=useState(false);
+    const[date,setdate]=useState("");
 
     function resetForm() {
         setName1("");
@@ -150,6 +150,7 @@ const FormB = () => {
             document.getElementById("INDEX")!.style.borderWidth = "2px";
             document.getElementById("indexerror")!.innerHTML = "This Field cannot be empty!";
             setable(true)
+            console.log(date);
         }
         
         if(value1==""){
@@ -164,12 +165,28 @@ const FormB = () => {
             document.getElementById("PAY")!.style.borderWidth = "2px";
             document.getElementById("payerror")!.innerHTML = "This Field cannot be empty!";
             setable(true)
-        }
-        
-        
-        
-        
+        }       
     }
+
+    const datePickerRef = useRef(null);
+
+    useEffect(() => {
+        // Ensure the ref current value is not null before initializing flatpickr
+        if (datePickerRef.current) {
+          const instance  = flatpickr(datePickerRef.current, {
+            enableTime: true, // Enable time picker
+            dateFormat: "U", // Set the date and time format
+            altFormat:"U",
+          });
+          console.log(date);
+        }
+      }, []);
+
+      function getTimestampString(date: string): Number {
+        return moment(date).toDate().getTime();
+    }
+
+    
 
   return (
     <>
@@ -257,7 +274,14 @@ const FormB = () => {
                                 <option value="1">Unpaid</option>
                                 <option value="2">Token Received</option>
                             </select>
+
+                            <input type="datetime-local" 
+                            ref={datePickerRef} 
+                            placeholder="Select delivery Date and Time" 
+                            value={date.toLocaleString()} 
+                            onChange={(e)=> {setdate(e.target.value);}} />
                             
+                        <ScrollBar orientation="horizontal" />
                         </ScrollArea>
 
                     <Web3Button
@@ -271,7 +295,9 @@ const FormB = () => {
                                 addressreceiver,
                                 index,
                                 value1,
-                                pay
+                                pay,
+                                getTimestampString(date)
+                                
                             ]
                         )}
                         onSuccess={() => {
@@ -279,6 +305,7 @@ const FormB = () => {
                             setAddContact(false);
                         }}
                         onSubmit={()=>{
+                            console.log(getTimestampString(date))
                             handlevalidation()
                         }}
                         onError={()=>{}}

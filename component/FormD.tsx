@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
-import { ScrollArea } from '../@/components/ui/scroll-area';
+import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import Geteachshipment from './geteachshipment';
 
 
@@ -50,6 +50,8 @@ const FormD = () => {
                                 value={index}
                                 onChange={(e) => setIndex(e.target.value)}
                             />
+
+                        <ScrollBar orientation="horizontal" />
                         </ScrollArea>
 
                         <Geteachshipment

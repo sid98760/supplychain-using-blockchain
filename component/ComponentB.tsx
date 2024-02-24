@@ -1,7 +1,7 @@
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../const/addresses";
 import ShipmentData from "./newshipment";
-import { ScrollArea } from '../@/components/ui/scroll-area';
+import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import React from 'react'
 import { Skeleton } from "../@/components/ui/skeleton";
 
@@ -39,6 +39,8 @@ const ComponentB = () => {
                             status={shipment.status}
                             role={shipment.role}
                             payment={shipment.pay}
+                            pickup={shipment.pickuptime}
+                            delivery={shipment.deliverytime}
                         />
                     ))
                 ) : (
@@ -54,6 +56,8 @@ const ComponentB = () => {
                 </div>
                 
             )}
+
+            <ScrollBar orientation="horizontal" />
             </ScrollArea>
             </div>
         </div>
