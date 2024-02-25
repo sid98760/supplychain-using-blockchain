@@ -146,7 +146,9 @@ const FormA = () => {
                             resetForm();
                             setAddContact(false);
                         }}
-                        onError={() => {}}
+                        onError={(err) => {
+                            alert(err);
+                        }}
                         onSubmit={()=>{
                             handlevalidation()
                         }}

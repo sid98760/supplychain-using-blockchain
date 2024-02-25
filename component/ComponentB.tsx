@@ -44,7 +44,7 @@ const ComponentB = () => {
                         />
                     ))
                 ) : (
-                    <p>No contacts found.</p>
+                    <p>No Shipments found.</p>
                 )
             ) : (
                 <div className="flex items-center space-x-4 ml-16 mt-10">

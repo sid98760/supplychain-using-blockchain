@@ -15,7 +15,7 @@ const FormD = () => {
     
 
     const [addContact, setAddContact] = useState(false);
-    const [index, setIndex] = useState("5");
+    const [index, setIndex] = useState("0");
 
     function resetForm() {
         setIndex("");

@@ -8,6 +8,8 @@ import { cn } from '../@/lib/utils';
 import { useAddress } from '@thirdweb-dev/react';
 import flatpickr from "flatpickr";
 import moment from 'moment';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 const FormB = () => {
@@ -23,6 +25,8 @@ const FormB = () => {
     const [pay,setpay] = useState("");
     const[disable,setable]=useState(false);
     const[date,setdate]=useState("");
+
+ 
 
     function resetForm() {
         setName1("");
@@ -150,7 +154,6 @@ const FormB = () => {
             document.getElementById("INDEX")!.style.borderWidth = "2px";
             document.getElementById("indexerror")!.innerHTML = "This Field cannot be empty!";
             setable(true)
-            console.log(date);
         }
         
         if(value1==""){
@@ -305,10 +308,11 @@ const FormB = () => {
                             setAddContact(false);
                         }}
                         onSubmit={()=>{
-                            console.log(getTimestampString(date))
                             handlevalidation()
                         }}
-                        onError={()=>{}}
+                        onError={(err)=>{
+                            alert(err.message);
+                        }}
                         isDisabled={disable}
                     >Start Shipment</Web3Button>
                 </div>
