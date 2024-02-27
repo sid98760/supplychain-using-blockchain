@@ -5,23 +5,39 @@ import { Web3Button } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../const/addresses";
 import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import { useAddress } from '@thirdweb-dev/react';
-
-import { ToastAction } from "../@/components/ui/toast"
-import { useToast } from '../@/components/ui/use-toast';
+import { useContractRead,useContract } from '@thirdweb-dev/react';
 
 import { cn } from '../@/lib/utils';
 
 const FormA = () => {
 
     const [addContact, setAddContact] = useState(false);
-    const [index, setIndex] = useState("");
+    var [index, setIndex] = useState("");
     const [product, setProduct] = useState("");
     const [quantity,setQuantity] = useState("");
+
+    const {
+        contract
+      } = useContract(CONTRACT_ADDRESS);
+
+    const
+    {
+      data: shipments1,
+      isLoading: islodingshipments
+    } = useContractRead
+    (
+      contract,
+      "getShipmentCount"
+    );
 
     function resetForm() {
         setIndex("");
         setProduct("");
         setQuantity("");
+    }
+
+    function showcreated(){
+        alert("Shipment Created!")
     }
 
     const add = useAddress();
@@ -101,6 +117,7 @@ const FormA = () => {
                     <h1>Add Shipment Details</h1>
                     <ScrollArea className={styles.addContactForm}>
                             <p id="numbererror" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
+                            <p id="numbererror2" className='text-sm/[6px] mb-2 text-red-700 font-bold'></p>
                             <input 
                                 type="number"
                                 min="0"
@@ -145,9 +162,13 @@ const FormA = () => {
                         onSuccess={() => {
                             resetForm();
                             setAddContact(false);
+                            showcreated();
                         }}
-                        onError={(err) => {
-                            alert(err);
+                        onError={(err)=>{
+                            var msg = String(err.message.match(/Reason: (.+?)\n/)?.[1]);
+                            if(err.message.match(/Reason: (.+?)\n/)?.[1]){
+                                alert(msg);
+                            }
                         }}
                         onSubmit={()=>{
                             handlevalidation()

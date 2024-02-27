@@ -31,9 +31,6 @@ type Props = {
     delivery:BigNumber;
 };
 
-
-
-
 const ShipmentData = ({ indexx, sendername, receivername,role,sender,receiver,productname,quantity,status,payment,pickup,delivery }: Props) => {
 
     

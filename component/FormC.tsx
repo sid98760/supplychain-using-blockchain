@@ -5,9 +5,9 @@ import { Web3Button } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "../const/addresses";
 import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import { useAddress } from '@thirdweb-dev/react';
-
-
 import { cn } from '../@/lib/utils';
+
+
 
 
 
@@ -23,10 +23,8 @@ const FormC = () => {
         
     }
 
-    function checkadd(addr: String){
-        if(addr!=add){
-
-        }
+    function showcompleted(){
+        alert("Shipment Created!")
     }
 
 
@@ -51,6 +49,7 @@ const FormC = () => {
                             <input 
                                 type="number"
                                 placeholder="Index"
+                                min="0"
                                 value={index}
                                 onChange={(e) => setIndex(e.target.value)}
                             />
@@ -70,8 +69,14 @@ const FormC = () => {
                         onSuccess={() => {
                             resetForm();
                             setAddContact(false);
+                            showcompleted();
                         }}
-                        onError={(Error)=> alert(Error)}
+                        onError={(err)=>{
+                            var msg = String(err.message.match(/Reason: (.+?)\n/)?.[1]);
+                            if(err.message.match(/Reason: (.+?)\n/)?.[1]){
+                                alert(msg);
+                            }
+                        }}
                     >Complete Shipment</Web3Button>
 
 

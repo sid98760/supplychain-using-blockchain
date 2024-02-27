@@ -47,8 +47,6 @@ const Geteachshipment = ({ index }: Props) => {
         "getShipment",
         [index]
     );
-    console.log("1", shipment);
-    console.log(shipment);
 
     
     function convertpickup(picktime: BigNumber){

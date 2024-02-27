@@ -3,16 +3,10 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import Geteachshipment from './geteachshipment';
-
-
 import { cn } from '../@/lib/utils';
 
 
-
-
 const FormD = () => {
-
-    
 
     const [addContact, setAddContact] = useState(false);
     const [index, setIndex] = useState("0");
@@ -20,10 +14,6 @@ const FormD = () => {
     function resetForm() {
         setIndex("");
     }
-
-    
-    
-
 
   return (
     <>

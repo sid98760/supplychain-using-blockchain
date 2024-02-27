@@ -8,7 +8,6 @@ import { cn } from '../@/lib/utils';
 import { useAddress } from '@thirdweb-dev/react';
 import flatpickr from "flatpickr";
 import moment from 'moment';
-import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -26,7 +25,6 @@ const FormB = () => {
     const[disable,setable]=useState(false);
     const[date,setdate]=useState("");
 
- 
 
     function resetForm() {
         setName1("");
@@ -38,6 +36,10 @@ const FormB = () => {
         console.log(value1);
         setpay("");
         console.log(pay);
+    }
+
+    function showstarted(){
+        alert("Shipment Started!")
     }
 
     const [err1,seterr1]=useState("");
@@ -306,12 +308,17 @@ const FormB = () => {
                         onSuccess={() => {
                             resetForm();
                             setAddContact(false);
+                            showstarted();
                         }}
                         onSubmit={()=>{
                             handlevalidation()
                         }}
                         onError={(err)=>{
-                            alert(err.message);
+                            var msg = String(err.message.match(/Reason: (.+?)\n/)?.[1]);
+                            if(err.message.match(/Reason: (.+?)\n/)?.[1]){
+                                alert(msg);
+                            }
+                            
                         }}
                         isDisabled={disable}
                     >Start Shipment</Web3Button>
