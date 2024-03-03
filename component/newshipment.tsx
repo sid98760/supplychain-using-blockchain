@@ -115,7 +115,7 @@ const ShipmentData = ({ indexx, sendername, receivername,role,sender,receiver,pr
     
 
     return(
-        <div className="rounded-xl border-0 hover:border-2 border-orange-500 bg-slate-300 text-stone-700 shadow-sm dark:border-orange-500 hover:dark:border-2 border-orange-500 dark:bg-slate-900 dark:text-slate-300 m-10">
+        <div className="rounded-xl border-0 hover:border-2  bg-slate-300 text-stone-700 shadow-sm dark:border-orange-500 hover:dark:border-2 border-orange-500 dark:bg-slate-900 dark:text-slate-300 m-10">
             <div className="p-5 flex flex-row w-full">
                 <h1 className="p-5">Index: {indexx.toString()}</h1>
                 <p className="p-5">Sender Name: {sendername}</p> 

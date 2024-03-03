@@ -66,7 +66,7 @@ const ComponentA = () => {
           <CarouselItem className="md:basis-1 lg:basis-1/2" id="startshipment">
           <div className="pl-10 pr-10">
             <Card>
-                <CardContent className="flex items-center flex flex-col rounded-xl h-96 w-full">
+                <CardContent className="flex items-center flex-col rounded-xl h-96 w-full">
                   <div className="p-2 h-80 w-full flex flex-col justify-center items-center">
                   <div className={styles.textanimation}>
                     <p className="font-black mb-5 mt-5 text-center text-4xl align-middle">Start Your Shipment Here</p>
@@ -85,7 +85,7 @@ const ComponentA = () => {
           <CarouselItem className="md:basis-1 lg:basis-1/2" id="completeshipment">
           <div className="pl-10 pr-10">
             <Card>
-              <CardContent className="flex items-center flex flex-col rounded-xl h-96 w-full">
+              <CardContent className="flex items-center flex-col rounded-xl h-96 w-full">
                 <div className="p-2 h-80 w-full flex flex-col justify-center items-center">
                   <div className={styles.textanimation}>
                     <p className="font-black mb-5 mt-5 text-center text-4xl align-middle">Complete Your Shipment Here</p>
@@ -104,7 +104,7 @@ const ComponentA = () => {
           <CarouselItem className="md:basis-1 lg:basis-1/2" id="getshipment">
           <div className="pl-10 pr-10">
             <Card>
-                <CardContent className="flex items-center  flex flex-col rounded-xl h-96 w-full">
+                <CardContent className="items-center flex flex-col rounded-xl h-96 w-full">
                   <div className="p-2 h-80 w-full flex flex-col justify-center items-center">
                   <div className={styles.textanimation}>
                     <p className="font-black mb-5 mt-5 text-center text-4xl align-middle">Get your Shipment Here</p>

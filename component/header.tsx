@@ -2,7 +2,7 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import React from "react";
 import { useState } from 'react';
 import { ThemeSwitcher } from "./mode-changer";
-import { ThemeProvider } from "../pages/theme-provider";
+import { ThemeProvider } from "./theme-provider";
 
 import { 
   DropdownMenu,
@@ -87,7 +87,7 @@ const Newnavi = () => {
                   </a>
                 </li>
                 <li>
-                  <div className="flex flex-row md:flex flex-row  md:mt-0 mt-5 justify-center">
+                  <div className="flex flex-row md:flex md:mt-0 mt-5 justify-center">
                     <div className="mr-5">
                       <ConnectWallet 
                         btnTitle="Login"
