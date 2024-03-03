@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import styles from '../styles/Home.module.css';
+import React from "react";
 import BigNumber from "bignumber.js";
 import { ScrollArea,ScrollBar } from '../@/components/ui/scroll-area';
 import {
@@ -32,9 +31,7 @@ type Props = {
 };
 
 const ShipmentData = ({ indexx, sendername, receivername,role,sender,receiver,productname,quantity,status,payment,pickup,delivery }: Props) => {
-
-    
-    
+ 
     var rolee = "";
     var stat = "";
     var payy= "";

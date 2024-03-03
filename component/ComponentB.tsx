@@ -20,7 +20,7 @@ const ComponentB = () => {
     );
   
     return (
-        <div className="mt-24 mb-10 ml-10 mr-10 pt-5 pb-10 bg-zinc-200 dark:bg-zinc-800 rounded-xl">
+        <div className="mt-24 mb-10 ml-10 mr-10 pt-5 pb-10 bg-zinc-200 dark:bg-zinc-800 rounded-xl" id="shiplist">
             <p className="text-2xl text-center p-5">All shipment Details</p>
             <div>
             <ScrollArea className="h-dvh">

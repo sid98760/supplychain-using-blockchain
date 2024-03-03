@@ -43,7 +43,7 @@ const ComponentA = () => {
   return (
     <Carousel className="mt-20">
       <CarouselContent>
-          <CarouselItem className="md:basis-1 lg:basis-1/2">
+          <CarouselItem className="md:basis-1 lg:basis-1/2" id="createshipment">
             <div className="pl-10 pr-10">
               <Card>
                 <CardContent className="items-center rounded-xl h-96 w-full">
@@ -63,7 +63,7 @@ const ComponentA = () => {
               </Card>
             </div>
           </CarouselItem>
-          <CarouselItem className="md:basis-1 lg:basis-1/2">
+          <CarouselItem className="md:basis-1 lg:basis-1/2" id="startshipment">
           <div className="pl-10 pr-10">
             <Card>
                 <CardContent className="flex items-center flex flex-col rounded-xl h-96 w-full">
@@ -82,7 +82,7 @@ const ComponentA = () => {
             </Card>
           </div>
           </CarouselItem>
-          <CarouselItem className="md:basis-1 lg:basis-1/2">
+          <CarouselItem className="md:basis-1 lg:basis-1/2" id="completeshipment">
           <div className="pl-10 pr-10">
             <Card>
               <CardContent className="flex items-center flex flex-col rounded-xl h-96 w-full">
@@ -101,7 +101,7 @@ const ComponentA = () => {
             </Card>
           </div>
           </CarouselItem>
-          <CarouselItem className="md:basis-1 lg:basis-1/2">
+          <CarouselItem className="md:basis-1 lg:basis-1/2" id="getshipment">
           <div className="pl-10 pr-10">
             <Card>
                 <CardContent className="flex items-center  flex flex-col rounded-xl h-96 w-full">
